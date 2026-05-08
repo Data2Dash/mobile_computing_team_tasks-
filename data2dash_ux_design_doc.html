@@ -1,0 +1,741 @@
+
+<!-- saved from url=(0193)file:///C:/Users/Maryem/AppData/Local/Packages/5319275A.WhatsAppDesktop_cv1g1gvanyjgm/LocalState/sessions/6D49C8A9FA4A244671398C5A3087EF5FF33D4E23/transfers/2026-15/data2dash_ux_design_doc.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Mono:wght@400;500&display=swap');
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --brand: #0F0F0E;
+    --brand-green: #1B4332;
+    --accent: #40916C;
+    --cream: #F5F3ED;
+    --warm: #EAE7DF;
+    --text: #1A1A18;
+    --muted: #6B6B65;
+    --border: rgba(0,0,0,0.10);
+    --card: #FFFFFF;
+    --ff: 'DM Sans', sans-serif;
+    --mono: 'DM Mono', monospace;
+  }
+  body { font-family: var(--ff); background: var(--cream); color: var(--text); }
+  .figma-wrap { width: 100%; }
+
+  /* NAV */
+  .fig-nav { display: flex; align-items: center; gap: 0; background: var(--brand); padding: 0 16px; height: 44px; position: sticky; top: 0; z-index: 100; }
+  .fig-logo { display: flex; align-items: center; gap: 8px; color: #fff; font-size: 13px; font-weight: 500; letter-spacing: .02em; margin-right: 20px; }
+  .fig-logo svg { width: 22px; height: 22px; }
+  .fig-tab { color: rgba(255,255,255,0.5); font-size: 12px; padding: 0 14px; height: 44px; display: flex; align-items: center; cursor: pointer; border-bottom: 2px solid transparent; transition: all .2s; white-space: nowrap; }
+  .fig-tab:hover { color: rgba(255,255,255,0.85); }
+  .fig-tab.active { color: #fff; border-bottom-color: #40916C; }
+
+  /* PAGE */
+  .fig-page { display: none; padding: 32px 20px 60px; max-width: 900px; margin: 0 auto; }
+  .fig-page.active { display: block; }
+
+  /* SECTION LABELS */
+  .frame-label { font-size: 10px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+  .frame-title { font-size: 22px; font-weight: 500; color: var(--text); margin-bottom: 6px; }
+  .frame-sub { font-size: 13px; color: var(--muted); margin-bottom: 28px; line-height: 1.6; }
+  .section-gap { margin-top: 48px; }
+
+  /* CARDS */
+  .card { background: var(--card); border-radius: 12px; border: 0.5px solid var(--border); padding: 20px; }
+  .card-sm { background: var(--card); border-radius: 10px; border: 0.5px solid var(--border); padding: 16px; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+  .grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 12px; }
+
+  /* STAT CARD */
+  .stat-num { font-size: 32px; font-weight: 500; color: var(--text); line-height: 1; }
+  .stat-label { font-size: 12px; color: var(--muted); margin-top: 4px; line-height: 1.4; }
+  .stat-bar { height: 3px; border-radius: 2px; background: var(--warm); margin-top: 12px; overflow: hidden; }
+  .stat-fill { height: 100%; border-radius: 2px; background: var(--accent); }
+
+  /* BAR CHART */
+  .bar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .bar-key { font-size: 12px; color: var(--text); min-width: 160px; }
+  .bar-track { flex: 1; height: 22px; background: var(--warm); border-radius: 4px; overflow: hidden; position: relative; }
+  .bar-fill { height: 100%; border-radius: 4px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; }
+  .bar-val { font-size: 11px; font-weight: 500; color: #fff; }
+  .bar-pct { font-size: 11px; color: var(--muted); min-width: 32px; text-align: right; }
+
+  /* EMPATHY MAP */
+  .emp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-radius: 12px; overflow: hidden; border: 0.5px solid var(--border); }
+  .emp-cell { padding: 20px; border-right: 0.5px solid var(--border); border-bottom: 0.5px solid var(--border); }
+  .emp-cell:nth-child(2n) { border-right: none; }
+  .emp-cell:nth-child(n+5) { border-bottom: none; }
+  .emp-head { font-size: 10px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 10px; }
+  .emp-quote { font-size: 12px; color: var(--text); line-height: 1.6; padding-left: 8px; border-left: 2px solid; margin-bottom: 6px; }
+  .emp-think { border-color: #7B61FF; }
+  .emp-feel  { border-color: #E8593C; }
+  .emp-say   { border-color: #40916C; }
+  .emp-do    { border-color: #2B7FE0; }
+  .emp-pain  { border-color: #E5A000; }
+  .emp-gain  { border-color: #1B4332; }
+
+  /* PERSONA */
+  .persona-header { display: flex; align-items: flex-start; gap: 20px; margin-bottom: 20px; }
+  .persona-avatar { width: 72px; height: 72px; border-radius: 50%; background: linear-gradient(135deg, #1B4332, #40916C); display: flex; align-items: center; justify-content: center; font-size: 28px; flex-shrink: 0; color: #fff; font-weight: 300; }
+  .persona-name { font-size: 20px; font-weight: 500; }
+  .persona-title { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .persona-quote { font-size: 13px; font-style: italic; color: var(--muted); margin-top: 6px; line-height: 1.5; }
+  .tag-list { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .tag { font-size: 11px; padding: 3px 9px; border-radius: 20px; font-weight: 400; }
+  .tag-green { background: #D8F3DC; color: #1B4332; }
+  .tag-amber { background: #FFF3CD; color: #7A4F00; }
+  .tag-red   { background: #FFE5E5; color: #7A1010; }
+  .tag-blue  { background: #DCE8FC; color: #0A3D8F; }
+  .persona-section-label { font-size: 10px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin: 16px 0 8px; }
+  .persona-bullet { font-size: 12px; color: var(--text); line-height: 1.6; padding-left: 12px; position: relative; margin-bottom: 4px; }
+  .persona-bullet::before { content: '·'; position: absolute; left: 0; color: var(--accent); font-size: 18px; top: -2px; }
+  .goal-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+  .goal-label { font-size: 12px; color: var(--text); min-width: 120px; }
+  .goal-bar { flex: 1; height: 6px; background: var(--warm); border-radius: 3px; overflow: hidden; }
+  .goal-fill { height: 100%; border-radius: 3px; background: var(--accent); }
+
+  /* DESIGN SYSTEM */
+  .color-swatch { height: 52px; border-radius: 8px; margin-bottom: 8px; }
+  .color-name { font-size: 11px; font-weight: 500; color: var(--text); }
+  .color-hex  { font-size: 10px; color: var(--muted); margin-top: 1px; font-family: var(--mono); }
+  .type-sample { margin-bottom: 16px; padding-bottom: 16px; border-bottom: 0.5px solid var(--border); }
+  .type-sample:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .type-meta { font-size: 10px; color: var(--muted); margin-top: 4px; font-family: var(--mono); }
+
+  /* BUTTONS */
+  .btn-demo { display: inline-flex; align-items: center; gap: 6px; font-family: var(--ff); font-size: 13px; cursor: pointer; transition: all .15s; border: none; }
+  .btn-primary { background: var(--brand); color: #fff; padding: 9px 18px; border-radius: 8px; font-weight: 500; }
+  .btn-secondary { background: var(--warm); color: var(--text); padding: 9px 18px; border-radius: 8px; font-weight: 400; }
+  .btn-outline { background: transparent; color: var(--text); padding: 8px 17px; border-radius: 8px; border: 0.5px solid var(--border); font-weight: 400; }
+  .btn-ghost { background: transparent; color: var(--accent); padding: 8px 0; font-weight: 500; }
+  .btn-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+
+  /* ICON SHOWCASE */
+  .icon-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; }
+  .icon-item { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+  .icon-box { width: 44px; height: 44px; background: var(--warm); border-radius: 10px; display: flex; align-items: center; justify-content: center; }
+  .icon-name { font-size: 10px; color: var(--muted); text-align: center; }
+
+  /* WIREFRAMES */
+  .wf-chrome { background: var(--cream); border-radius: 12px; border: 0.5px solid var(--border); overflow: hidden; }
+  .wf-topbar { background: var(--brand); display: flex; align-items: center; padding: 0 16px; height: 40px; gap: 20px; }
+  .wf-logo-txt { color: #fff; font-size: 11px; font-weight: 500; display: flex; align-items: center; gap: 6px; }
+  .wf-nav-item { color: rgba(255,255,255,0.45); font-size: 11px; cursor: pointer; }
+  .wf-nav-item.active { color: #fff; }
+  .wf-spacer { flex: 1; }
+  .wf-body { padding: 0; }
+  .wf-sidebar { background: var(--brand); width: 180px; height: 100%; position: absolute; }
+  .wf-content { flex: 1; background: #F9F8F4; }
+  .wf-input { background: #fff; border-radius: 10px; border: 0.5px solid var(--border); padding: 10px 14px; font-size: 12px; color: var(--muted); width: 100%; }
+  .placeholder-line { height: 8px; border-radius: 4px; background: var(--warm); margin-bottom: 6px; }
+  .placeholder-line.dark { background: #D8D5CC; }
+  .wf-paper { background: #fff; border-radius: 8px; border: 0.5px solid var(--border); padding: 16px; margin: 12px; }
+  .wf-avatar { width: 28px; height: 28px; border-radius: 50%; background: var(--accent); display: flex; align-items: center; justify-content: center; font-size: 10px; color: #fff; font-weight: 500; }
+  .wf-bubble { background: var(--warm); border-radius: 8px; padding: 8px 12px; font-size: 11px; color: var(--text); margin-bottom: 6px; }
+  .wf-bubble.ai { background: #fff; border: 0.5px solid var(--border); }
+  .wf-search-result { border: 0.5px solid var(--border); border-radius: 8px; padding: 12px; margin-bottom: 8px; background: #fff; }
+  .citation-tag { background: var(--brand); color: #fff; border-radius: 6px; padding: 4px 8px; font-size: 9px; font-weight: 500; }
+  .pill { background: #E3F2E8; color: var(--brand-green); font-size: 10px; padding: 2px 8px; border-radius: 20px; }
+</style>
+
+</head><body><div class="figma-wrap">
+  <div class="fig-nav">
+    <div class="fig-logo">
+      <svg viewBox="0 0 22 22" fill="none"><rect width="22" height="22" rx="5" fill="#40916C"></rect><path d="M11 4l1.8 5.5H18l-4.6 3.3 1.8 5.5L11 15l-4.2 3.3 1.8-5.5L4 9.5h5.2L11 4z" fill="#fff"></path></svg>
+      DATA2DASH — UX Research Doc
+    </div>
+    <div class="fig-tab active" onclick="showPage(&#39;survey&#39;)">Survey</div>
+    <div class="fig-tab" onclick="showPage(&#39;empathy&#39;)">Empathy + Persona</div>
+    <div class="fig-tab" onclick="showPage(&#39;design&#39;)">Design System</div>
+    <div class="fig-tab" onclick="showPage(&#39;wireframes&#39;)">Wireframes</div>
+  </div>
+
+  <!-- ── PAGE 1: SURVEY ─────────────────────────────── -->
+  <div class="fig-page active" id="page-survey">
+    <div class="frame-label">Phase 1 · UX Research</div>
+    <div class="frame-title">User Survey Analysis</div>
+    <div class="frame-sub">57 responses collected · March 2026 · Google Forms</div>
+
+    <div class="grid-4" style="margin-bottom:24px">
+      <div class="card-sm">
+        <div class="stat-num">57</div>
+        <div class="stat-label">Total responses</div>
+        <div class="stat-bar"><div class="stat-fill" style="width:100%"></div></div>
+      </div>
+      <div class="card-sm">
+        <div class="stat-num">74%</div>
+        <div class="stat-label">Students</div>
+        <div class="stat-bar"><div class="stat-fill" style="width:74%"></div></div>
+      </div>
+      <div class="card-sm">
+        <div class="stat-num">68%</div>
+        <div class="stat-label">Very comfortable with AI</div>
+        <div class="stat-bar"><div class="stat-fill" style="width:68%"></div></div>
+      </div>
+      <div class="card-sm">
+        <div class="stat-num">37%</div>
+        <div class="stat-label">Prefer dark mode</div>
+        <div class="stat-bar"><div class="stat-fill" style="width:37%"></div></div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="frame-label" style="margin-bottom:14px">User roles</div>
+        <div class="bar-row"><span class="bar-key">Student</span><div class="bar-track"><div class="bar-fill" style="width:74%;background:#1B4332"><span class="bar-val">42</span></div></div><span class="bar-pct">74%</span></div>
+        <div class="bar-row"><span class="bar-key">Industry Professional</span><div class="bar-track"><div class="bar-fill" style="width:16%;background:#40916C"><span class="bar-val">9</span></div></div><span class="bar-pct">16%</span></div>
+        <div class="bar-row"><span class="bar-key">Academic Staff</span><div class="bar-track"><div class="bar-fill" style="width:5%;background:#74C69D"><span class="bar-val">3</span></div></div><span class="bar-pct">5%</span></div>
+        <div class="bar-row"><span class="bar-key">Researcher</span><div class="bar-track"><div class="bar-fill" style="width:5%;background:#B7E4C7"><span class="bar-val">3</span></div></div><span class="bar-pct">5%</span></div>
+      </div>
+      <div class="card">
+        <div class="frame-label" style="margin-bottom:14px">Top pain points</div>
+        <div class="bar-row"><span class="bar-key" style="min-width:140px">Too many papers</span><div class="bar-track"><div class="bar-fill" style="width:53%;background:#E8593C"><span class="bar-val">30</span></div></div><span class="bar-pct">53%</span></div>
+        <div class="bar-row"><span class="bar-key" style="min-width:140px">Hard math notation</span><div class="bar-track"><div class="bar-fill" style="width:53%;background:#E8593C"><span class="bar-val">30</span></div></div><span class="bar-pct">53%</span></div>
+        <div class="bar-row"><span class="bar-key" style="min-width:140px">Finding research gaps</span><div class="bar-track"><div class="bar-fill" style="width:47%;background:#F4A261"><span class="bar-val">27</span></div></div><span class="bar-pct">47%</span></div>
+        <div class="bar-row"><span class="bar-key" style="min-width:140px">Relevant papers fast</span><div class="bar-track"><div class="bar-fill" style="width:28%;background:#FABB68"><span class="bar-val">16</span></div></div><span class="bar-pct">28%</span></div>
+        <div class="bar-row"><span class="bar-key" style="min-width:140px">No audio / multitask</span><div class="bar-track"><div class="bar-fill" style="width:23%;background:#FAC275"><span class="bar-val">13</span></div></div><span class="bar-pct">23%</span></div>
+      </div>
+    </div>
+
+    <div class="grid-2 section-gap">
+      <div class="card">
+        <div class="frame-label" style="margin-bottom:14px">Current tools used</div>
+        <div class="bar-row"><span class="bar-key">ChatGPT / AI tools</span><div class="bar-track"><div class="bar-fill" style="width:91%;background:#7B61FF"><span class="bar-val">52</span></div></div><span class="bar-pct">91%</span></div>
+        <div class="bar-row"><span class="bar-key">Google Scholar</span><div class="bar-track"><div class="bar-fill" style="width:56%;background:#2B7FE0"><span class="bar-val">32</span></div></div><span class="bar-pct">56%</span></div>
+        <div class="bar-row"><span class="bar-key">ResearchGate</span><div class="bar-track"><div class="bar-fill" style="width:19%;background:#5AA9E6"><span class="bar-val">11</span></div></div><span class="bar-pct">19%</span></div>
+        <div class="bar-row"><span class="bar-key">ArXiv</span><div class="bar-track"><div class="bar-fill" style="width:18%;background:#8EC5F8"><span class="bar-val">10</span></div></div><span class="bar-pct">18%</span></div>
+        <div class="bar-row"><span class="bar-key">Semantic Scholar</span><div class="bar-track"><div class="bar-fill" style="width:7%;background:#BFE0FF"><span class="bar-val">4</span></div></div><span class="bar-pct">7%</span></div>
+      </div>
+      <div class="card">
+        <div class="frame-label" style="margin-bottom:14px">Feature priority (avg 1–5)</div>
+        <div class="bar-row"><span class="bar-key" style="min-width:155px">Intelligent search</span><div class="bar-track"><div class="bar-fill" style="width:81%;background:#1B4332"><span class="bar-val">4.07</span></div></div></div>
+        <div class="bar-row"><span class="bar-key" style="min-width:155px">Chat with PDF</span><div class="bar-track"><div class="bar-fill" style="width:80%;background:#40916C"><span class="bar-val">4.00</span></div></div></div>
+        <div class="bar-row"><span class="bar-key" style="min-width:155px">Summary generation</span><div class="bar-track"><div class="bar-fill" style="width:78%;background:#52B788"><span class="bar-val">3.88</span></div></div></div>
+        <div class="bar-row"><span class="bar-key" style="min-width:155px">Citation generator</span><div class="bar-track"><div class="bar-fill" style="width:75%;background:#74C69D"><span class="bar-val">3.77</span></div></div></div>
+        <div class="bar-row"><span class="bar-key" style="min-width:155px">Knowledge graph</span><div class="bar-track"><div class="bar-fill" style="width:73%;background:#95D5B2"><span class="bar-val">3.67</span></div></div></div>
+        <div class="bar-row"><span class="bar-key" style="min-width:155px">Research timeline</span><div class="bar-track"><div class="bar-fill" style="width:72%;background:#B7E4C7"><span class="bar-val">3.61</span></div></div></div>
+        <div class="bar-row"><span class="bar-key" style="min-width:155px">YouTube recommender</span><div class="bar-track"><div class="bar-fill" style="width:71%;background:#D8F3DC"><span class="bar-val">3.54</span></div></div></div>
+        <div class="bar-row"><span class="bar-key" style="min-width:155px">AI podcast</span><div class="bar-track"><div class="bar-fill" style="width:66%;background:#ECFAF0"><span style="color:#888;font-size:11px;padding-right:4px">3.28</span></div></div></div>
+      </div>
+    </div>
+
+    <div class="grid-2 section-gap">
+      <div class="card">
+        <div class="frame-label" style="margin-bottom:14px">Weekly time on lit review</div>
+        <div class="bar-row"><span class="bar-key">Less than 1 hour</span><div class="bar-track"><div class="bar-fill" style="width:39%;background:#40916C"><span class="bar-val">22</span></div></div><span class="bar-pct">39%</span></div>
+        <div class="bar-row"><span class="bar-key">1–3 hours</span><div class="bar-track"><div class="bar-fill" style="width:35%;background:#52B788"><span class="bar-val">20</span></div></div><span class="bar-pct">35%</span></div>
+        <div class="bar-row"><span class="bar-key">3–6 hours</span><div class="bar-track"><div class="bar-fill" style="width:16%;background:#74C69D"><span class="bar-val">9</span></div></div><span class="bar-pct">16%</span></div>
+        <div class="bar-row"><span class="bar-key">More than 6 hours</span><div class="bar-track"><div class="bar-fill" style="width:11%;background:#B7E4C7"><span class="bar-val">6</span></div></div><span class="bar-pct">11%</span></div>
+      </div>
+      <div class="card">
+        <div class="frame-label" style="margin-bottom:14px">UI theme preference</div>
+        <div class="bar-row"><span class="bar-key">Dark mode</span><div class="bar-track"><div class="bar-fill" style="width:37%;background:#0F0F0E"><span class="bar-val">21</span></div></div><span class="bar-pct">37%</span></div>
+        <div class="bar-row"><span class="bar-key">System default</span><div class="bar-track"><div class="bar-fill" style="width:25%;background:#6B6B65"><span class="bar-val">14</span></div></div><span class="bar-pct">25%</span></div>
+        <div class="bar-row"><span class="bar-key">Toggle option</span><div class="bar-track"><div class="bar-fill" style="width:21%;background:#888882"><span class="bar-val">12</span></div></div><span class="bar-pct">21%</span></div>
+        <div class="bar-row"><span class="bar-key">Light mode</span><div class="bar-track"><div class="bar-fill" style="width:18%;background:#B0B0A8"><span class="bar-val">10</span></div></div><span class="bar-pct">18%</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── PAGE 2: EMPATHY + PERSONA ───────────────────── -->
+  <div class="fig-page" id="page-empathy">
+    <div class="frame-label">Phase 1 · UX Research</div>
+    <div class="frame-title">Empathy Map</div>
+    <div class="frame-sub">Synthesized from 57 survey responses — primary user: CS/AI student researcher</div>
+
+    <div class="emp-grid">
+      <div class="emp-cell" style="background:#FDF7FF">
+        <div class="emp-head" style="color:#7B61FF">Thinks</div>
+        <div class="emp-quote emp-think">"There are too many papers — I can't keep up with the field."</div>
+        <div class="emp-quote emp-think">"I wish I could just ask a question and get the right papers instantly."</div>
+        <div class="emp-quote emp-think">"Math notation in papers is intimidating and slows me down."</div>
+      </div>
+      <div class="emp-cell" style="background:#FFF7F5">
+        <div class="emp-head" style="color:#E8593C">Feels</div>
+        <div class="emp-quote emp-feel">Overwhelmed by the volume and pace of new publications.</div>
+        <div class="emp-quote emp-feel">Frustrated that current tools force too many tabs open.</div>
+        <div class="emp-quote emp-feel">Excited about AI tools — already uses ChatGPT daily.</div>
+      </div>
+      <div class="emp-cell" style="background:#F5FBF7">
+        <div class="emp-head" style="color:#40916C">Says</div>
+        <div class="emp-quote emp-say">"I want semantic search, not just keyword matching."</div>
+        <div class="emp-quote emp-say">"I start on Google Scholar then just ask ChatGPT to explain the paper."</div>
+        <div class="emp-quote emp-say">"Mobile support matters — I read on my phone on the go."</div>
+      </div>
+      <div class="emp-cell" style="background:#F5F8FF">
+        <div class="emp-head" style="color:#2B7FE0">Does</div>
+        <div class="emp-quote emp-do">Tabs between Google Scholar, ArXiv, ChatGPT for every session.</div>
+        <div class="emp-quote emp-do">Copies text from PDFs and pastes into ChatGPT to understand equations.</div>
+        <div class="emp-quote emp-do">Spends under 3 hours/week on literature review — surface-level only.</div>
+      </div>
+      <div class="emp-cell" style="background:#FFFBF2; border-bottom:none">
+        <div class="emp-head" style="color:#E5A000">Pain points</div>
+        <div class="emp-quote emp-pain">No way to see how papers connect — can't identify research gaps.</div>
+        <div class="emp-quote emp-pain">Can't consume content while multitasking (no audio mode).</div>
+        <div class="emp-quote emp-pain">Citation formatting is manual and error-prone.</div>
+      </div>
+      <div class="emp-cell" style="background:#F5FBF7; border-bottom:none">
+        <div class="emp-head" style="color:#1B4332">Goals / Gains</div>
+        <div class="emp-quote emp-gain">Find the most relevant papers for a topic in under 2 minutes.</div>
+        <div class="emp-quote emp-gain">Understand complex papers without needing a separate AI chat.</div>
+        <div class="emp-quote emp-gain">Auto-generate citations in APA/IEEE — zero manual work.</div>
+      </div>
+    </div>
+
+    <div class="section-gap">
+      <div class="frame-label">Phase 1 · UX Research</div>
+      <div class="frame-title">Primary Persona</div>
+      <div class="frame-sub">Based on 42 student respondents (74% of total) · Secondary persona: Industry Professional</div>
+
+      <div class="card">
+        <div class="persona-header">
+          <div class="persona-avatar">A</div>
+          <div>
+            <div class="persona-name">Ahmed Tarek</div>
+            <div class="persona-title">Computer Engineering Student · Helwan University · Cairo, Egypt · Age 22</div>
+            <div class="persona-quote">"I need to stay current with AI research for my thesis, but reading papers feels like a second full-time job I can't afford."</div>
+            <div class="tag-list">
+              <span class="tag tag-blue">Tech-savvy</span>
+              <span class="tag tag-green">Daily AI user</span>
+              <span class="tag tag-amber">Time-constrained</span>
+              <span class="tag tag-red">Overwhelmed by volume</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div>
+            <div class="persona-section-label">Background</div>
+            <div class="persona-bullet">4th-year student, minor in Cybersecurity</div>
+            <div class="persona-bullet">Uses Python, C++, and cloud tools regularly</div>
+            <div class="persona-bullet">Has used ChatGPT daily for 2+ years</div>
+            <div class="persona-bullet">Reads papers on phone while commuting</div>
+
+            <div class="persona-section-label">Goals</div>
+            <div class="goal-row"><span class="goal-label">Find papers fast</span><div class="goal-bar"><div class="goal-fill" style="width:95%"></div></div></div>
+            <div class="goal-row"><span class="goal-label">Understand deep math</span><div class="goal-bar"><div class="goal-fill" style="width:80%"></div></div></div>
+            <div class="goal-row"><span class="goal-label">Auto citations</span><div class="goal-bar"><div class="goal-fill" style="width:75%"></div></div></div>
+            <div class="goal-row"><span class="goal-label">Mobile experience</span><div class="goal-bar"><div class="goal-fill" style="width:70%"></div></div></div>
+            <div class="goal-row"><span class="goal-label">Audio / multitask</span><div class="goal-bar"><div class="goal-fill" style="width:55%"></div></div></div>
+          </div>
+          <div>
+            <div class="persona-section-label">Frustrations</div>
+            <div class="persona-bullet">Switches between 4–5 tools for one research session</div>
+            <div class="persona-bullet">Mathematical notation kills reading momentum</div>
+            <div class="persona-bullet">No way to see how papers cite each other visually</div>
+            <div class="persona-bullet">Can't read PDFs and take notes in the same place</div>
+
+            <div class="persona-section-label">How Data2Dash helps</div>
+            <div class="persona-bullet">Intelligent Search → one semantic query, curated list</div>
+            <div class="persona-bullet">Chat with PDF → explain equations inline while reading</div>
+            <div class="persona-bullet">Citation Generator → one-click APA/IEEE export</div>
+            <div class="persona-bullet">Knowledge Graph → see research connections visually</div>
+            <div class="persona-bullet">AI Podcast → consume on commute, hands-free</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-gap card" style="border-left: 3px solid var(--accent)">
+      <div class="frame-label" style="margin-bottom:8px">Secondary Persona (brief)</div>
+      <div style="display:flex;align-items:center;gap:14px">
+        <div style="width:44px;height:44px;border-radius:50%;background:#2B7FE0;display:flex;align-items:center;justify-content:center;font-size:16px;color:#fff;font-weight:300;flex-shrink:0">S</div>
+        <div>
+          <div style="font-size:14px;font-weight:500">Sara Mahmoud · Industry Professional · ML Engineer</div>
+          <div style="font-size:12px;color:var(--muted);margin-top:3px">Uses research to stay ahead competitively. Needs: highly cited papers first, fast synthesis, no time for deep reading. Values: report summaries, search agent, knowledge graph. Spends under 1 hr/week on lit review.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── PAGE 3: DESIGN SYSTEM ───────────────────────── -->
+  <div class="fig-page" id="page-design">
+    <div class="frame-label">Phase 2 · Design</div>
+    <div class="frame-title">Design System</div>
+    <div class="frame-sub">Colors · Typography · Components · Icons — derived from Data2Dash screens</div>
+
+    <!-- COLORS -->
+    <div class="frame-label" style="margin-bottom:12px">Color palette</div>
+    <div class="card" style="margin-bottom:24px">
+      <div class="grid-4" style="margin-bottom:20px">
+        <div>
+          <div class="color-swatch" style="background:#0F0F0E"></div>
+          <div class="color-name">Brand Black</div><div class="color-hex">#0F0F0E</div>
+          <div style="font-size:10px;color:var(--muted);margin-top:3px">Nav, CTAs, logo</div>
+        </div>
+        <div>
+          <div class="color-swatch" style="background:#F5F3ED;border:0.5px solid #DDD"></div>
+          <div class="color-name">Cream</div><div class="color-hex">#F5F3ED</div>
+          <div style="font-size:10px;color:var(--muted);margin-top:3px">Page background</div>
+        </div>
+        <div>
+          <div class="color-swatch" style="background:#1B4332"></div>
+          <div class="color-name">Forest Green</div><div class="color-hex">#1B4332</div>
+          <div style="font-size:10px;color:var(--muted);margin-top:3px">Active states</div>
+        </div>
+        <div>
+          <div class="color-swatch" style="background:#40916C"></div>
+          <div class="color-name">Accent Green</div><div class="color-hex">#40916C</div>
+          <div style="font-size:10px;color:var(--muted);margin-top:3px">Highlights, icons</div>
+        </div>
+      </div>
+      <div class="grid-4">
+        <div>
+          <div class="color-swatch" style="background:#FFFFFF;border:0.5px solid #DDD"></div>
+          <div class="color-name">White</div><div class="color-hex">#FFFFFF</div>
+          <div style="font-size:10px;color:var(--muted);margin-top:3px">Cards, paper BG</div>
+        </div>
+        <div>
+          <div class="color-swatch" style="background:#EAE7DF;border:0.5px solid #DDD"></div>
+          <div class="color-name">Warm Gray</div><div class="color-hex">#EAE7DF</div>
+          <div style="font-size:10px;color:var(--muted);margin-top:3px">Secondary fills</div>
+        </div>
+        <div>
+          <div class="color-swatch" style="background:#6B6B65"></div>
+          <div class="color-name">Muted Text</div><div class="color-hex">#6B6B65</div>
+          <div style="font-size:10px;color:var(--muted);margin-top:3px">Secondary labels</div>
+        </div>
+        <div>
+          <div class="color-swatch" style="background:#D8F3DC;border:0.5px solid #DDD"></div>
+          <div class="color-name">Mint</div><div class="color-hex">#D8F3DC</div>
+          <div style="font-size:10px;color:var(--muted);margin-top:3px">Success, tags</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TYPOGRAPHY -->
+    <div class="frame-label" style="margin-bottom:12px">Typography</div>
+    <div class="card" style="margin-bottom:24px">
+      <div class="type-sample">
+        <div style="font-size:32px;font-weight:300;letter-spacing:-0.02em;color:var(--text);line-height:1.1">Data2Dash AI</div>
+        <div class="type-meta">DM Sans · 32px · Light 300 · Display heading</div>
+      </div>
+      <div class="type-sample">
+        <div style="font-size:20px;font-weight:500;color:var(--text)">Your AI Research Assistant</div>
+        <div class="type-meta">DM Sans · 20px · Medium 500 · Section title</div>
+      </div>
+      <div class="type-sample">
+        <div style="font-size:15px;font-weight:400;color:var(--text);line-height:1.6">Cognitive psychology emerged as a response to behaviorism's limitations, emphasizing internal mental processes including memory, perception, and problem-solving.</div>
+        <div class="type-meta">DM Sans · 15px · Regular 400 · Body text</div>
+      </div>
+      <div class="type-sample">
+        <div style="font-size:12px;font-weight:400;color:var(--muted)">98 words · 0 citations · ArXiv · 2025-02-19</div>
+        <div class="type-meta">DM Sans · 12px · Regular 400 · Metadata / captions</div>
+      </div>
+      <div class="type-sample" style="border:none;margin-bottom:0;padding-bottom:0">
+        <div style="font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Navigate · Library · Current</div>
+        <div class="type-meta">DM Sans · 11px · Medium 500 · Uppercase labels</div>
+      </div>
+    </div>
+
+    <!-- BUTTONS -->
+    <div class="frame-label" style="margin-bottom:12px">Buttons</div>
+    <div class="card" style="margin-bottom:24px">
+      <div class="btn-row" style="margin-bottom:20px">
+        <button class="btn-demo btn-primary">Sign in</button>
+        <button class="btn-demo btn-primary" style="background:var(--accent)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"></path></svg>
+          Upload .docx
+        </button>
+        <button class="btn-demo btn-outline">Continue with Google</button>
+        <button class="btn-demo btn-secondary">New Page</button>
+        <button class="btn-demo btn-ghost">Export ↗</button>
+      </div>
+      <div class="grid-3" style="gap:10px">
+        <div class="card-sm" style="text-align:center">
+          <div style="font-size:10px;color:var(--muted);margin-bottom:8px">PRIMARY</div>
+          <div style="font-size:11px;margin-bottom:4px">Background: #0F0F0E</div>
+          <div style="font-size:11px;margin-bottom:4px">Text: #FFFFFF</div>
+          <div style="font-size:11px">Radius: 8px · Padding: 9px 18px</div>
+        </div>
+        <div class="card-sm" style="text-align:center">
+          <div style="font-size:10px;color:var(--muted);margin-bottom:8px">OUTLINE</div>
+          <div style="font-size:11px;margin-bottom:4px">Border: 0.5px #DDD</div>
+          <div style="font-size:11px;margin-bottom:4px">Background: transparent</div>
+          <div style="font-size:11px">Radius: 8px · Google OAuth</div>
+        </div>
+        <div class="card-sm" style="text-align:center">
+          <div style="font-size:10px;color:var(--muted);margin-bottom:8px">GHOST / LINK</div>
+          <div style="font-size:11px;margin-bottom:4px">Color: #40916C</div>
+          <div style="font-size:11px;margin-bottom:4px">No background</div>
+          <div style="font-size:11px">Nav tabs, inline actions</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ICONS -->
+    <div class="frame-label" style="margin-bottom:12px">Icon set — Lucide (stroke-based, 1.5px)</div>
+    <div class="card">
+      <div class="icon-grid">
+        <div class="icon-item"><div class="icon-box"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#40916C" stroke-width="1.5"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"></path></svg></div><div class="icon-name">Chat</div></div>
+        <div class="icon-item"><div class="icon-box"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#40916C" stroke-width="1.5"><circle cx="11" cy="11" r="8"></circle><path d="M21 21l-4.35-4.35"></path></svg></div><div class="icon-name">Search</div></div>
+        <div class="icon-item"><div class="icon-box"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#40916C" stroke-width="1.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"></path></svg></div><div class="icon-name">Upload</div></div>
+        <div class="icon-item"><div class="icon-box"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#40916C" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg></div><div class="icon-name">Citation</div></div>
+        <div class="icon-item"><div class="icon-box"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#40916C" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"></path></svg></div><div class="icon-name">Library</div></div>
+        <div class="icon-item"><div class="icon-box"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#40916C" stroke-width="1.5"><circle cx="12" cy="12" r="3"></circle><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"></path></svg></div><div class="icon-name">AI / Spark</div></div>
+        <div class="icon-item"><div class="icon-box"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#40916C" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M3 9h18M9 21V9"></path></svg></div><div class="icon-name">Navigate</div></div>
+        <div class="icon-item"><div class="icon-box"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#40916C" stroke-width="1.5"><polyline points="4 7 4 4 20 4 20 7"></polyline><line x1="9" y1="20" x2="15" y2="20"></line><line x1="12" y1="4" x2="12" y2="20"></line></svg></div><div class="icon-name">Format / Bold</div></div>
+        <div class="icon-item"><div class="icon-box"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#40916C" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"></path><circle cx="12" cy="10" r="3"></circle></svg></div><div class="icon-name">Source / ArXiv</div></div>
+        <div class="icon-item"><div class="icon-box"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#40916C" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.7A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"></path></svg></div><div class="icon-name">Audio</div></div>
+        <div class="icon-item"><div class="icon-box"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#40916C" stroke-width="1.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg></div><div class="icon-name">Stats</div></div>
+        <div class="icon-item"><div class="icon-box"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#40916C" stroke-width="1.5"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg></div><div class="icon-name">Export</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── PAGE 4: WIREFRAMES ──────────────────────────── -->
+  <div class="fig-page" id="page-wireframes">
+    <div class="frame-label">Phase 2 · Design</div>
+    <div class="frame-title">Wireframes — 5 Screens</div>
+    <div class="frame-sub">Lo-fi annotated wireframes for all core screens · Desktop layout · 900px reference</div>
+
+    <!-- SCREEN 1: LOGIN -->
+    <div style="margin-bottom:40px">
+      <div style="font-size:11px;font-weight:500;color:var(--muted);margin-bottom:8px;letter-spacing:.06em">SCREEN 1 · Login / Authentication</div>
+      <div class="wf-chrome">
+        <div style="background:var(--cream);padding:40px 20px;display:flex;flex-direction:column;align-items:center;min-height:380px;justify-content:center">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:24px">
+            <div style="width:28px;height:28px;background:var(--brand);border-radius:6px;display:flex;align-items:center;justify-content:center"><svg width="16" height="16" viewBox="0 0 22 22" fill="none"><path d="M11 3l1.8 5.5H18l-4.6 3.3 1.8 5.5L11 14l-4.2 3.3 1.8-5.5L4 9.5h5.2L11 3z" fill="#fff"></path></svg></div>
+            <span style="font-size:13px;font-weight:500">DATA2DASH</span>
+          </div>
+          <div style="width:340px;background:#fff;border-radius:12px;border:0.5px solid var(--border);padding:24px">
+            <div style="font-size:18px;font-weight:500;text-align:center;margin-bottom:4px">Welcome back</div>
+            <div style="font-size:12px;color:var(--muted);text-align:center;margin-bottom:20px">Sign in to your account</div>
+            <div style="border:0.5px solid var(--border);border-radius:8px;padding:10px 14px;font-size:12px;color:var(--text);display:flex;align-items:center;gap:10px;margin-bottom:14px;cursor:pointer">
+              <svg width="16" height="16" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"></path><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"></path><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"></path></svg>
+              Continue with Google
+            </div>
+            <div style="font-size:11px;color:var(--muted);text-align:center;margin-bottom:14px">or continue with email</div>
+            <div style="font-size:11px;color:var(--muted);margin-bottom:4px">Email</div>
+            <div style="border:0.5px solid var(--border);border-radius:7px;padding:9px 12px;font-size:12px;color:#CCC;margin-bottom:10px">you@example.com</div>
+            <div style="font-size:11px;color:var(--muted);margin-bottom:4px">Password</div>
+            <div style="border:0.5px solid var(--border);border-radius:7px;padding:9px 12px;font-size:12px;color:#CCC;margin-bottom:14px">••••••••</div>
+            <div style="background:var(--brand);color:#fff;border-radius:8px;padding:10px;text-align:center;font-size:13px;font-weight:500">Sign in</div>
+            <div style="text-align:center;font-size:11px;color:var(--muted);margin-top:12px">Don't have an account? <span style="color:var(--text);font-weight:500">Create one</span></div>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:10px;padding:10px 14px;background:var(--warm);border-radius:8px;font-size:11px;color:var(--muted);line-height:1.6">
+        <span style="font-weight:500;color:var(--text)">Annotations:</span> Centered single-column layout · Google OAuth as primary CTA (reduces friction) · Email/password as fallback · No distractions — no nav bar on auth screens · "Create one" link below fold
+      </div>
+    </div>
+
+    <!-- SCREEN 2: CHAT -->
+    <div style="margin-bottom:40px">
+      <div style="font-size:11px;font-weight:500;color:var(--muted);margin-bottom:8px;letter-spacing:.06em">SCREEN 2 · Chat — AI Research Assistant</div>
+      <div class="wf-chrome">
+        <div class="wf-topbar">
+          <div class="wf-logo-txt"><svg width="16" height="16" viewBox="0 0 22 22" fill="none"><rect width="22" height="22" rx="5" fill="#40916C"></rect><path d="M11 3l1.8 5.5H18l-4.6 3.3 1.8 5.5L11 14l-4.2 3.3 1.8-5.5L4 9.5h5.2L11 3z" fill="#fff"></path></svg>DATA2DASH</div>
+          <span class="wf-nav-item active">Chat</span>
+          <span class="wf-nav-item">Search</span>
+          <span class="wf-nav-item">Upload</span>
+          <span class="wf-nav-item">Citation</span>
+          <div class="wf-spacer"></div>
+          <div style="width:24px;height:24px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:10px;color:#fff">P</div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:240px;padding:30px 20px 0">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+            <svg width="28" height="28" viewBox="0 0 22 22" fill="none"><rect width="22" height="22" rx="5" fill="#0F0F0E"></rect><path d="M11 3l1.8 5.5H18l-4.6 3.3 1.8 5.5L11 14l-4.2 3.3 1.8-5.5L4 9.5h5.2L11 3z" fill="#fff"></path></svg>
+            <div style="font-size:16px;font-weight:500">Data2Dash AI</div>
+          </div>
+          <div style="font-size:12px;color:var(--muted);margin-bottom:20px">Your AI Research Assistant for Machine Learning &amp; AI Papers</div>
+          <div style="display:flex;gap:8px;margin-bottom:24px">
+            <div style="border:0.5px solid var(--border);border-radius:20px;padding:6px 14px;font-size:11px;display:flex;align-items:center;gap:6px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"></path></svg>Explain Transformers</div>
+            <div style="border:0.5px solid var(--border);border-radius:20px;padding:6px 14px;font-size:11px;display:flex;align-items:center;gap:6px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"></path></svg>Latest in RAG</div>
+          </div>
+          <div style="width:100%;max-width:600px;background:#fff;border-radius:12px;border:0.5px solid var(--border);padding:14px">
+            <div style="font-size:12px;color:#CCC;margin-bottom:10px">Ask anything about AI, ML, or upload papers/media...</div>
+            <div style="border:0.5px solid var(--border);border-radius:8px;padding:6px 12px;display:inline-flex;align-items:center;gap:6px;font-size:11px;color:var(--muted)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"></path></svg>Upload your source</div>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:10px;padding:10px 14px;background:var(--warm);border-radius:8px;font-size:11px;color:var(--muted);line-height:1.6">
+        <span style="font-weight:500;color:var(--text)">Annotations:</span> Empty-state prompt chips guide first use · Single input bar with upload affordance · Minimal chrome — no sidebar on landing · Quick-start prompts surfaced from survey top tasks (Explain Transformers, RAG)
+      </div>
+    </div>
+
+    <!-- SCREEN 3: UPLOAD / PDF VIEWER -->
+    <div style="margin-bottom:40px">
+      <div style="font-size:11px;font-weight:500;color:var(--muted);margin-bottom:8px;letter-spacing:.06em">SCREEN 3 · Upload — PDF Viewer + Chat</div>
+      <div class="wf-chrome">
+        <div class="wf-topbar">
+          <div class="wf-logo-txt"><svg width="16" height="16" viewBox="0 0 22 22" fill="none"><rect width="22" height="22" rx="5" fill="#40916C"></rect><path d="M11 3l1.8 5.5H18l-4.6 3.3 1.8 5.5L11 14l-4.2 3.3 1.8-5.5L4 9.5h5.2L11 3z" fill="#fff"></path></svg>DATA2DASH</div>
+          <span class="wf-nav-item">Chat</span><span class="wf-nav-item">Search</span><span class="wf-nav-item active">Upload</span><span class="wf-nav-item">Citation</span>
+          <div class="wf-spacer"></div>
+          <div style="width:24px;height:24px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:10px;color:#fff">P</div>
+        </div>
+        <div style="display:flex;height:280px">
+          <!-- Sidebar -->
+          <div style="width:160px;background:var(--brand);padding:12px;flex-shrink:0">
+            <div style="font-size:10px;color:rgba(255,255,255,0.4);margin-bottom:8px;letter-spacing:.08em">LIBRARY</div>
+            <div style="background:rgba(255,255,255,0.12);border-radius:6px;padding:8px;margin-bottom:6px">
+              <div class="placeholder-line" style="width:80%;background:rgba(255,255,255,0.25)"></div>
+              <div class="placeholder-line" style="width:50%;background:rgba(255,255,255,0.15)"></div>
+            </div>
+            <div style="padding:8px;margin-bottom:6px;opacity:0.5">
+              <div class="placeholder-line" style="width:70%;background:rgba(255,255,255,0.15)"></div>
+              <div class="placeholder-line" style="width:45%;background:rgba(255,255,255,0.1)"></div>
+            </div>
+            <div style="margin-top:16px;font-size:10px;color:rgba(255,255,255,0.4);margin-bottom:6px">TABS</div>
+            <div style="display:flex;flex-direction:column;gap:4px">
+              <div style="color:rgba(255,255,255,0.9);font-size:10px;background:rgba(255,255,255,0.12);border-radius:4px;padding:4px 8px">Chat</div>
+              <div style="color:rgba(255,255,255,0.4);font-size:10px;padding:4px 8px">View</div>
+              <div style="color:rgba(255,255,255,0.4);font-size:10px;padding:4px 8px">Figures</div>
+              <div style="color:rgba(255,255,255,0.4);font-size:10px;padding:4px 8px">Audio</div>
+            </div>
+          </div>
+          <!-- Chat panel -->
+          <div style="width:220px;border-right:0.5px solid var(--border);padding:12px;overflow:hidden">
+            <div style="display:flex;align-items:center;gap:6px;margin-bottom:12px">
+              <div style="width:22px;height:22px;border-radius:50%;background:#D8F3DC;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:500;color:var(--brand-green)">AI</div>
+              <div style="font-size:10px;font-weight:500">Ready to help</div>
+            </div>
+            <div class="wf-bubble">Upload PDF documents to start chatting.</div>
+            <div style="margin-top:10px;font-size:10px;color:var(--muted);margin-bottom:4px">Your message</div>
+            <div style="border:0.5px solid var(--border);border-radius:6px;padding:7px 10px;font-size:10px;color:#CCC">Ask about this paper...</div>
+          </div>
+          <!-- PDF panel -->
+          <div style="flex:1;background:#525659;padding:12px;overflow:hidden;display:flex;flex-direction:column;gap:8px">
+            <div style="background:#fff;border-radius:4px;padding:12px">
+              <div style="font-size:11px;font-weight:500;text-align:center;margin-bottom:4px">Mennat Allah Essam Mohamed</div>
+              <div class="placeholder-line dark" style="width:60%;margin:0 auto 4px"></div>
+              <div class="placeholder-line dark" style="width:40%;margin:0 auto 10px"></div>
+              <div style="font-size:9px;font-weight:500;margin-bottom:3px">Summary</div>
+              <div class="placeholder-line dark" style="width:100%"></div>
+              <div class="placeholder-line dark" style="width:90%"></div>
+              <div class="placeholder-line dark" style="width:80%"></div>
+              <div style="font-size:9px;font-weight:500;margin-top:6px;margin-bottom:3px">Education</div>
+              <div class="placeholder-line dark"></div>
+              <div class="placeholder-line dark" style="width:70%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:10px;padding:10px 14px;background:var(--warm);border-radius:8px;font-size:11px;color:var(--muted);line-height:1.6">
+        <span style="font-weight:500;color:var(--text)">Annotations:</span> 3-column layout: sidebar library nav / AI chat / PDF viewer · Mode tabs (Chat, View, Figures, Audio) address survey's top request — multitasking audio · Library panel shows previous files for fast switching
+      </div>
+    </div>
+
+    <!-- SCREEN 4: SEARCH -->
+    <div style="margin-bottom:40px">
+      <div style="font-size:11px;font-weight:500;color:var(--muted);margin-bottom:8px;letter-spacing:.06em">SCREEN 4 · Academic Search Engine</div>
+      <div class="wf-chrome">
+        <div class="wf-topbar">
+          <div class="wf-logo-txt"><svg width="16" height="16" viewBox="0 0 22 22" fill="none"><rect width="22" height="22" rx="5" fill="#40916C"></rect><path d="M11 3l1.8 5.5H18l-4.6 3.3 1.8 5.5L11 14l-4.2 3.3 1.8-5.5L4 9.5h5.2L11 3z" fill="#fff"></path></svg>DATA2DASH</div>
+          <span class="wf-nav-item">Chat</span><span class="wf-nav-item active">Search</span><span class="wf-nav-item">Upload</span><span class="wf-nav-item">Citation</span>
+          <div class="wf-spacer"></div>
+          <div style="width:24px;height:24px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:10px;color:#fff">P</div>
+        </div>
+        <div style="padding:20px">
+          <div style="font-size:16px;font-weight:500;margin-bottom:14px">Academic Search Engine</div>
+          <div style="display:flex;gap:8px;margin-bottom:12px">
+            <div style="flex:1;border:0.5px solid var(--border);border-radius:8px;padding:9px 14px;font-size:12px;color:var(--text);background:#fff;display:flex;align-items:center;gap:8px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="1.5"><circle cx="11" cy="11" r="8"></circle><path d="M21 21l-4.35-4.35"></path></svg>RAG</div>
+            <div style="background:var(--brand);border-radius:8px;width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+            <div style="font-size:11px;color:var(--muted)">Sources:</div>
+            <div style="display:flex;gap:6px">
+              <span class="pill">ArXiv</span><span class="pill">IEEE</span><span class="pill">Semantic</span>
+            </div>
+          </div>
+          <div style="font-size:11px;color:var(--muted);margin-bottom:10px">Page 1 (approx. 10,000 results)</div>
+          <div class="wf-search-result">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px">
+              <div style="display:flex;gap:6px"><span style="font-size:9px;background:var(--warm);padding:2px 6px;border-radius:4px">ARXIV</span><span style="font-size:9px;color:var(--muted)">2025-02-19</span></div>
+              <span style="font-size:10px;color:var(--accent)">View PDF ↗</span>
+            </div>
+            <div style="font-size:12px;font-weight:500;margin-bottom:4px">RAG-Gym: Systematic Optimization of Language Agents for Retrieval-Augmented Generation</div>
+            <div style="font-size:10px;color:#2B7FE0;margin-bottom:4px">Guangzhi Xiong, Qiao Jin, Xiao Wang...</div>
+            <div class="placeholder-line" style="width:100%"></div>
+            <div class="placeholder-line" style="width:80%"></div>
+          </div>
+          <div class="wf-search-result">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px">
+              <div style="display:flex;gap:6px"><span style="font-size:9px;background:var(--warm);padding:2px 6px;border-radius:4px">ARXIV</span><span style="font-size:9px;color:var(--muted)">2024-01-27</span></div>
+              <span style="font-size:10px;color:var(--accent)">View PDF ↗</span>
+            </div>
+            <div style="font-size:12px;font-weight:500;margin-bottom:4px">MultiHop-RAG: Benchmarking Retrieval-Augmented Generation for Multi-Hop Queries</div>
+            <div style="font-size:10px;color:#2B7FE0;margin-bottom:4px">Yixuan Tang, Yi Yang</div>
+            <div class="placeholder-line" style="width:100%"></div>
+            <div class="placeholder-line" style="width:65%"></div>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:10px;padding:10px 14px;background:var(--warm);border-radius:8px;font-size:11px;color:var(--muted);line-height:1.6">
+        <span style="font-weight:500;color:var(--text)">Annotations:</span> Source filter pills (ArXiv, IEEE, Semantic Scholar) match top tools from survey · Result cards show date + source badge first (recency was top sorting preference) · "View PDF" opens inline viewer · Pagination count sets expectations
+      </div>
+    </div>
+
+    <!-- SCREEN 5: CITATION -->
+    <div style="margin-bottom:16px">
+      <div style="font-size:11px;font-weight:500;color:var(--muted);margin-bottom:8px;letter-spacing:.06em">SCREEN 5 · Citation — Smart Writing + Auto-cite</div>
+      <div class="wf-chrome">
+        <div class="wf-topbar">
+          <div class="wf-logo-txt"><svg width="16" height="16" viewBox="0 0 22 22" fill="none"><rect width="22" height="22" rx="5" fill="#40916C"></rect><path d="M11 3l1.8 5.5H18l-4.6 3.3 1.8 5.5L11 14l-4.2 3.3 1.8-5.5L4 9.5h5.2L11 3z" fill="#fff"></path></svg>DATA2DASH</div>
+          <span class="wf-nav-item">Chat</span><span class="wf-nav-item">Search</span><span class="wf-nav-item">Upload</span><span class="wf-nav-item active">Citation</span>
+          <div class="wf-spacer"></div>
+          <div style="width:24px;height:24px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:10px;color:#fff">P</div>
+        </div>
+        <div style="display:flex;height:290px">
+          <!-- Left sidebar -->
+          <div style="width:160px;background:var(--brand);padding:12px;flex-shrink:0">
+            <div style="border:0.5px solid rgba(255,255,255,0.15);border-radius:7px;padding:7px 10px;margin-bottom:10px;display:flex;align-items:center;gap:6px;font-size:10px;color:#fff"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>New Page</div>
+            <div style="border:0.5px solid rgba(255,255,255,0.1);border-radius:6px;padding:7px 10px;margin-bottom:14px;font-size:10px;color:rgba(255,255,255,0.5)">Upload .docx</div>
+            <div style="font-size:9px;color:rgba(255,255,255,0.35);letter-spacing:.08em;margin-bottom:6px">NAVIGATE</div>
+            <div style="background:rgba(255,255,255,0.14);border-radius:6px;padding:8px;margin-bottom:4px">
+              <div style="font-size:10px;color:#fff;font-weight:500">Citation</div>
+            </div>
+            <div style="padding:8px;opacity:0.5">
+              <div style="font-size:10px;color:rgba(255,255,255,0.7)">pyschology</div>
+              <div style="font-size:9px;color:rgba(255,255,255,0.4)">98 words · 0 citations</div>
+            </div>
+            <div style="border-top:0.5px solid rgba(255,255,255,0.1);margin-top:10px;padding-top:10px">
+              <div style="font-size:9px;color:rgba(255,255,255,0.35);letter-spacing:.08em;margin-bottom:6px">STATS</div>
+              <div style="display:flex;justify-content:space-between;font-size:9px;color:rgba(255,255,255,0.5);margin-bottom:3px"><span>Words</span><span style="color:#fff">98</span></div>
+              <div style="display:flex;justify-content:space-between;font-size:9px;color:rgba(255,255,255,0.5);margin-bottom:3px"><span>Characters</span><span style="color:#fff">770</span></div>
+              <div style="display:flex;justify-content:space-between;font-size:9px;color:rgba(255,255,255,0.5)"><span>Citations</span><span style="color:#fff">0</span></div>
+            </div>
+          </div>
+          <!-- Main editor -->
+          <div style="flex:1;background:#F9F8F4;padding:16px;overflow:hidden">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+              <div style="font-size:11px;color:var(--muted);display:flex;align-items:center;gap:6px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"></path></svg>pyschology</div>
+              <div style="display:flex;gap:8px;align-items:center">
+                <span style="font-size:10px;background:var(--warm);border-radius:6px;padding:3px 8px">APA 7th Edition</span>
+                <span style="font-size:10px;background:var(--brand);color:#fff;border-radius:6px;padding:3px 10px">Export ↗</span>
+              </div>
+            </div>
+            <div style="max-width:480px;margin:0 auto;background:#fff;border-radius:8px;border:0.5px solid var(--border);padding:20px">
+              <div style="font-size:16px;font-weight:300;margin-bottom:12px">pyschology</div>
+              <div style="font-size:11px;font-weight:500;margin-bottom:6px">Cognitive Psychology</div>
+              <div style="font-size:11px;line-height:1.7;margin-bottom:10px;color:var(--text)">Cognitive psychology emerged as a response to behaviorism's limitations... <span style="background:#D8F3DC;border-radius:3px;padding:0 2px">Ulric Neisser (1967) defined cognition...</span></div>
+              <div style="background:var(--brand);color:#fff;border-radius:6px;padding:4px 10px;display:inline-flex;align-items:center;gap:6px;font-size:10px;margin-bottom:10px"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>Cite This  Ctrl+K</div>
+              <div class="placeholder-line" style="width:100%"></div>
+              <div class="placeholder-line" style="width:85%"></div>
+              <div class="placeholder-line" style="width:70%"></div>
+            </div>
+            <div style="margin-top:10px;display:flex;gap:12px;padding:8px 0;border-top:0.5px solid var(--border)">
+              <span style="font-size:10px;color:var(--muted)">FORMAT</span>
+              <span style="font-size:10px;font-weight:500;color:var(--text)">B</span>
+              <span style="font-size:10px;font-style:italic;color:var(--text)">I</span>
+              <span style="font-size:10px;text-decoration:underline;color:var(--text)">U</span>
+              <div class="wf-spacer"></div>
+              <span style="font-size:10px;color:var(--muted)">98 words · Unsaved</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:10px;padding:10px 14px;background:var(--warm);border-radius:8px;font-size:11px;color:var(--muted);line-height:1.6">
+        <span style="font-weight:500;color:var(--text)">Annotations:</span> Sidebar shows stats (words, chars, citations) — gamifies writing · "Cite This" hotkey (Ctrl+K) enables inline citation insertion (survey: #3 priority feature at 3.77 avg) · APA dropdown allows format switching · Selected text turns green to show citable passage · Format bar at bottom mirrors Google Docs muscle memory
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function showPage(id) {
+  document.querySelectorAll('.fig-page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.fig-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  event.target.classList.add('active');
+}
+</script>
+</body></html>
