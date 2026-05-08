@@ -5,3 +5,6 @@ DATA2DASH user survey : https://docs.google.com/forms/d/e/1FAIpQLSeg5IQ0F-SJ-t9H
 
 
 DATA2DASH user survey Responses : https://docs.google.com/spreadsheets/u/0/d/1YRyga1w1c2P8BSfzYVmwjbSmPxLQgdj68X6sAJqLww4/htmlview
+
+
+DATA2DASH — UX Research Doc :file:///C:/Users/Maryem/OneDrive%20-%20Helwan%20university(Engineering%20(Helwan))/all%20for%20grad/data2dash_ux_design_doc.html
